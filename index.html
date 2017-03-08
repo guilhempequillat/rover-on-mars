@@ -1,0 +1,71 @@
+<!-- 
+Projet Web Design EPF 4A filière TIC
+Code écrit par Adrien LENOIRE et Guilhem PEQUILLAT
+Date : 08/03/2017
+Description du fichier : page principale du site, elle contient les menus et le footer ou l'on peut changer de langue. Les articles sont chargés ici par angular-route.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="nasa">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"><!--Fixe la taille de la page sur les télépone et tablettes-->
+        <title>Martian Rovers</title>
+        <link  rel="stylesheet" href="vendor/bootstrap/bootstrap.css"/><!--Chargement de bootstrap-->
+		<link rel="stylesheet" href="css/style.css"><!--Fichiers ou se trouve des styles personnalisés-->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script type="text/javascript" src="vendor/angular/angular.js"></script><!--Chargement d'angular-->
+		<script type="text/javascript" src="vendor/angular/angular-route.js"></script><!--Chargement d'angular route-->
+		<script type="text/javascript" src="js/app-nasa.js"></script><!--La ou se trouve notre module angular-->
+    </head>
+    <body>
+        <header><!--Dans le header il y a le titre et les deux menus-->
+            <div class="row">
+				<div class="col-xs-6">
+                    <h1>Martian Rovers</h1>
+				</div>
+				<div class="menugrand"><!--Ce menu s'affiche sur les grands écrans-->
+					<a href="#/accueil" class="lienmenu">
+                        <div class="col-xs-2 lienmenu">Accueil</div>
+                    </a>
+					<a href="#/opporitunityspirit" class="lienmenu">
+                        <div class="col-xs-2 lienmenu">Spirit & Opportunity</div>
+                    </a>
+					<a href="#/curiosity" class="lienmenu">
+                        <div class="col-xs-2 lienmenu"> Curiosity</div>
+                    </a>
+				</div>
+			</div>
+			<div class="menupetit"><!--Ce menu s'affiche sur les petits écrans-->
+				<img src="images/menuicon.png" class="menuicon"></img><!--Icone du menu-->
+				<div id="linkspetit">
+					<a href="#/accueil" class="lienmenu">
+                        <div class="divlink">Accueil</div>
+                    </a>
+					<a href="#/opporitunityspirit" class="lienmenu">
+                        <div class="divlink">Opporitunity & Spirit</div>
+                    </a>
+					<a href="#/curiosity" class="lienmenu">
+                        <div class="divlink">Curiosity</div>
+                    </a>
+				</div>
+			</div>
+        </header>
+        <div ng-view="" class="contentpage">
+            <!--C'est ici que les pages partials s'affichent -->
+        </div>
+        <footer><!--Dans le footer il y a les choix des langues Anglais ou Français-->
+            <div id="choixdelangue">
+                <label>
+                    Français
+                    <input id="fr" type="radio" name="langue" value="français" style="display:none"/><!--Radio bouton du français-->
+                    <img class="iconlangue" src="images/iconfr.png"></img><!--icone de langue-->
+                </label>
+                <label>
+                    English
+                    <input id="en" type="radio" name="langue" value="anglais"  style="display:none"/><!--Radio bouton du français-->
+                    <img class="iconlangue" src="images/icongb.png"></img><!--icone de langue-->
+                </label>
+            </div>
+        </footer>
+    </body>
+</html>
