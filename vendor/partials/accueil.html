@@ -1,0 +1,135 @@
+<!-- 
+Projet Web Design EPF 4A filière TIC
+Code écrit par Adrien LENOIRE et Guilhem PEQUILLAT
+Date : 08/03/2017
+Description du fichier : ce code html se chargera dans la page index.html, ce code contient un article de description des missions sur Mars et la partie sur les météorites. 
+-->
+
+<br>
+<article class="fr"><!--article de présentation en français-->
+	<div class="row">
+		<div class="col-md-4"><!--utilisation de bootstrap pour la responsivité-->
+		<p>
+			Bienvenue sur le site Rover On Mars. Ce site a pour but de vous permettre d’accéder aux photos prises par les différents rovers de la <a href="https://www.nasa.gov/">NASA (National Aeronautics and Space Administration</a>. La NASA a lancé de multiple engin à destination de Mars mais seul une poigné de missions ont réussies. Actuellement seul deux rovers sont en activité.
+		</p>
+		<p>
+			Spirit et Opportunity sont deux rovers qui font partie d’une mission double de la NASA : Mars Exploration Rover. Spirit et Opportunity furent lancé le 10 Juin et 7 Juillet 2003 et atterrirent avec sucée le 4 et 25 Janvier 2004.  Spirit fut abandonné le 22 Mars 2010 suite à un enlisement du rover dans les dunes martiennes. Spirit fonctionnât pendant 2208 jours et parcourut 7 730,5 mètres. Opportunity fonctionne toujours est en est à plus de 4700 jours de fonctionnement et a parcouru 43,74 km sur le sol martien. 
+		</p>	
+		</div>
+		<div class="col-md-8"><!--utilisation de bootstrap pour la responsivité-->
+		<img src="images/picture1.jpg" class="imgarticle1 img-responsive"></img>
+		</div>
+	</div>
+	<p>
+		Le rover Curiosity fut lancé le 26 Novembre 2011 par la NASA. Curiosity est la pierre angulaire de la mission Mars science Laboratory visant a envoyé un véritable laboratoire mobile sur le sol de Mars. Le rover a réussi à atterri sur le sol de Mars le 6 Aout 2012. Le rover est toujours en état de marche et il en est à plus de 1600 jours de fonctionnement plus de 13 km parcourut. 
+	</p>
+	<img src="images/picture2.jpg" class="imgarticle1 img-responsive"></img>
+</article>
+<article class="en"><!--article de présentation en anglais-->
+	<div class="row">
+		<div class="col-md-4"><!--utilisation de bootstrap pour la responsivité-->
+	<p>
+		Welcome on the website Rover On Mars. His site would like to allow you to access to the photo was taken by the <a href="https://www.nasa.gov/">NASA (National Aeronautics and Space Administration</a> martian rovers. NASA launched some probes and lander to Mars but only few missions got successful. Currently, only two rovers are on. 
+	</p>
+	<p>
+		Spirit and Opportunity are two rovers which represent the NASA mission: Mars Exploration Rover. Spirit and Opportunity had launched the 10 June and 7 Jul 2003 and successfully landed the 4 and 25 January 2004. Spirit mission was stop the 22 March 2010 after the rover stalling into the martian dune. Spirit was on for 2208 days and traveled on 7 730,5 meters. Opportunity is currently on and is forced 4700 day of operation and is traveled 43,74 km on the martian ground. 
+	</p>
+		</div>
+		<div class="col-md-8"><!--utilisation de bootstrap pour la responsivité-->
+	<img src="images/picture1.jpg" class="imgarticle1 img-responsive"></img>
+	</div>
+	</div>
+	<p>
+		Curiosity rover was launched the 26 November 2011 by NASA. Curiosity is the main part of the mission Mars Science Laboratory which targeted to send a mobile laboratory on Mars. The rover success to land on the martian ground the 6 August 2012. The rover is currently on and it forced the 1600 days of operation and it traveled 13 km on the ground of Mars. 
+	</p>
+	<img src="images/picture2.jpg" class="imgarticle1 img-responsive"></img>
+</article>
+<article><!--Article d'affichage des météorites-->
+    <h2 class="fr">Bonus : Affichage des météorites proches de la Terre</h2>
+    <h2 class="en">Bonus : Display of meteorites close to the Earth</h2>
+	<p class="fr">Cette article vous permet de voir la liste des météorites qui passeront prêt de la terre dans les 60 prochains jours. </p>
+	<p class="en">This article allows you to see the list of meteorites that pass near the earth in the next 60 days.  </p>
+	<div ng-app="nasa" ng-controller="nasaControlerMeteor as nasa"><!--Controller des météorites-->
+    <h3 class="fr">Unité de mesure de la distance à la Terre</h3>    
+    <h3 class="en">Unit of measurement of the distance to the Earth</h3>
+        <label>Km : </label><input name="nomFiltre" type="radio" ng-model="nasa.choixFiltre" value="filtreKm" ng-click="changementFiltre()"/><br>
+        <label>U.A. : </label><input name="nomFiltre" type="radio" ng-model="nasa.choixFiltre" value="filtreUa" ng-click="changementFiltre()"/><br>
+        <label class="fr">Trier les résultats par : </label>
+        <label class="en">Order results by : </label><br/>
+        
+       <select name="pays" id="pays" ng-model="nasa.choixTrie" ng-click="sortBy()"><!--déclanche un événement sur un click et fait trier les résultat de la manière choisie-->
+           <optgroup label="Date"><!--Deux possibilié de trie pour chaques catégorie et les option sont traduites en français-->
+               <option value="codeDate/non" class="fr">Date la plus proche</option>
+               <option value="codeDate/oui" class="fr">Date la plus éloignée</option>
+               <option value="codeDate/non" class="en">Nearest date</option>
+               <option value="codeDate/oui" class="en">Farest date</option>
+           </optgroup>
+           <optgroup label="Nom de l'objet">
+               <option value="des/non" class="fr">Ordre alphabétique</option>
+               <option value="des/oui" class="fr">Ordre anti-alphabétique</option>
+               <option value="des/non" class="en">Alphabetical order</option>
+               <option value="des/oui" class="en">anti-alphabetical order</option>
+           </optgroup>
+           <optgroup label="Distance de la terre">
+               <option value="dist_min/non" class="fr">Distance croissante</option>
+               <option value="dist_min/oui" class="fr">Distance décroissante</option>
+               <option value="dist_min/non" class="en">Increasing Distance</option>
+               <option value="dist_min/oui" class="en">Decreasing Distance</option>
+           </optgroup>
+       </select>
+		<div class="row">
+            <div ng-repeat="meteor in nasa.donnees| orderBy:propertyName:reverse"><!--Les résultats sont triés avec la propriété choisi dans propertyName-->
+                <div class="col-md-4 meteor">
+                    <p>
+                        <div class="resultMeteor fr">
+                            <h4>Nom : {{meteor.des}}</h4>
+                            Distance minimum : {{meteor.distAffichage}}<br>
+                            Date d'approche : {{meteor.cd}}<br>
+							Ordre : {{$index+1}}<!--Affichage de l'ordre des photos-->
+                        </div>
+                        <div class="resultMeteor en">
+                            <h4>Name : {{meteor.des}}</h4>
+                            Minimum distance : {{meteor.distAffichage}}<br>
+                            Date of approach : {{meteor.cd}}<br>
+							Position : {{$index+1}}<!--Affichage de l'ordre des photos-->
+                        </div>
+					
+                    </p>
+                </div>
+            </div>
+		</div>
+	</div>
+</article>
+<script>/*script du choix de langue*/
+	if(document.getElementById("en").checked){//A l'ouverture de la page vérification de la langue sélectionné dans le radio bouton en bas de la home page
+		for(var i=0;i<document.getElementsByClassName("en").length;i++){//affichage ou cachage de tous les élément avec la classe en
+			document.getElementsByClassName("en")[i].style.display="block";
+		}
+		for(var i=0;i<document.getElementsByClassName("fr").length;i++){//affichage ou cachage de tous les élément avec la classe fr
+			document.getElementsByClassName("fr")[i].style.display="none";
+		}
+	}else{
+		for(var i=0;i<document.getElementsByClassName("fr").length;i++){//affichage ou cachage de tous les élément avec la classe fr
+			document.getElementsByClassName("fr")[i].style.display="block";
+		}
+		for(var i=0;i<document.getElementsByClassName("en").length;i++){//affichage ou cachage de tous les élément avec la classe en
+			document.getElementsByClassName("en")[i].style.display="none";
+		}
+	}
+	document.getElementById("fr").addEventListener('click',function(){//Ecouteur qui déclanche la fonction lorsque l'on click sur les choix de langue
+		for(var i=0;i<document.getElementsByClassName("fr").length;i++){//affichage ou cachage de tous les élément avec la classe
+			document.getElementsByClassName("fr")[i].style.display="block";
+		}
+		for(var i=0;i<document.getElementsByClassName("en").length;i++){//affichage ou cachage de tous les élément avec la classe en
+			document.getElementsByClassName("en")[i].style.display="none";
+		}
+	});
+	document.getElementById("en").addEventListener('click',function(){//Ecouteur qui déclanche la fonction lorsque l'on click sur les choix de langue
+		for(var i=0;i<document.getElementsByClassName("en").length;i++){//affichage ou cachage de tous les élément avec la classe fr
+			document.getElementsByClassName("en")[i].style.display="block";
+		}
+		for(var i=0;i<document.getElementsByClassName("fr").length;i++){//affichage ou cachage de tous les élément avec la classe en
+			document.getElementsByClassName("fr")[i].style.display="none";
+		}
+	});
+</script>

@@ -1,0 +1,142 @@
+<!-- 
+Projet Web Design EPF 4A filière TIC
+Code écrit par Adrien LENOIRE et Guilhem PEQUILLAT
+Date : 08/03/2017
+Description du fichier : ce code html se chargera dans la page index.html, ce code contient un article, le twiter, le formulaire des photos, un carrousel et l'affichage des photos avec ng-repeat pour les rovers spirits et opportunity.
+-->
+<div class="row">
+	<article class="fr"><!--Article écrit en français-->
+        <div class="row">
+            <div class="col-md-7"><!--utilisation de bootstrap pour la responsivité-->
+                <h2>Mars Exploration Rover</h2>
+                <p><!--text-->
+                    Les Mars Exploration Rovers, furent lancés vers Mars le 10 juin et le 7 juillet 2003, à la recherche de réponses sur l'histoire de l'eau sur Mars. Ils atterrirent sur Mars le 3 janvier et le 24 janvier 2004. La mission Mars Exploration Rover fait partie du programme Mars Exploration de la NASA, un effort à long terme d'exploration robotique de la planète rouge. Le principal objectif scientifique de la mission est de rechercher et de caractériser un large éventail de roches et de sols qui contiennent des indices sur l'activité de l'eau passée sur Mars. Le vaisseau spatial est destiné à des sites sur les côtés opposés de Mars qui semblent avoir été touchés par l'eau liquide dans le passé. Les sites d'atterrissage sont au cratère de Gusev, un ancien lac possible dans un cratère d'impact géant, et Meridiani Planum, où les dépôts minéraux suggèrent Mars avait un passé humide. Une fois l'atterrisseur protégé par un airbag se pose sur la surface et se soit ouvert, les robots se sont déplacés pour prendre des images panoramiques. Ces images donnent aux scientifiques l'information dont ils ont besoin pour choisir des cibles géologiques prometteuses qui racontent une partie de l'histoire de l'eau dans le passé de Mars. Ensuite, les rovers se déplace sur Mars pour effectuer des recherches scientifiques sur place.
+                </p>
+            </div>
+            <div class="col-md-5"><!--utilisation de bootstrap pour la responsivité-->
+                <section>
+                    <img src="images/rover-mer.png" class="img-responsive"></img>
+                    <legend>Un rover MER, les rovers Spirit et Opportunity sont similaires</legend>
+                </section>
+            </div>
+        </div>
+	</article>
+	<article class="en"><!--Article écrit en anglais-->
+        <div class="row">
+            <div class="col-md-7"><!--utilisation de bootstrap pour la responsivité-->
+                <h2> Mars Exploration Rover</h2>
+                <p><!--text-->
+                    NASA's twin robot geologists, the Mars Exploration Rovers, launched toward Mars on June 10 and July 7, 2003, in search of answers about the history of water on Mars. They landed on Mars January 3 and January 24, 2004. The Mars Exploration Rover mission is part of NASA's Mars Exploration Program, a long-term effort of robotic exploration of the red planet. Primary among the mission's scientific goals is to search for and characterize a wide range of rocks and soils that hold clues to past water activity on Mars. The spacecraft are targeted to sites on opposite sides of Mars that appear to have been affected by liquid water in the past. The landing sites are at Gusev Crater, a possible former lake in a giant impact crater, and Meridiani Planum, where mineral deposits suggest Mars had a wet past. After the airbag-protected landing craft settled onto the surface and opened, the rovers rolled out to take panoramic images. These images give scientists the information they need to select promising geological targets that tell part of the story of water in Mars' past. Then, the rovers drive to those locations to perform on-site scientific investigations.
+                </p>
+            </div>
+            <div class="col-md-5"><!--utilisation de bootstrap pour la responsivité-->
+                <section>
+                    <img src="images/rover-mer.png" class="img-responsive"></img>
+                    <legend>A rover MER, The Spirit and Opportunity rovers are similar</legend>
+                </section>
+            </div>
+        </div>
+	</article>
+</div>
+<div class="row">	
+	<div class="col-sm-4"><!--utilisation de bootstrap pour la responsivité-->
+		<div class="twiter"><!--div pour twiter-->
+			<a class="twitter-timeline"
+			  href="https://twitter.com/marsrovers"
+			  data-width="780"
+			  data-height="417">
+				Tweets by @TwitterDev
+			</a>
+			<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>	<!--script nésséssaire à l'affichage twiter-->
+		</div>
+	</div>
+    <div ng-app="nasa" ng-controller="nasaControllerPhotoSpiritCuriosityRecherche as nasa"><!--Controller pour l'affichage des photos des Rovers-->
+        <div class="col-sm-8">
+            <form class="formulaire" ng-submit="myRequest()" ><!--Formulaire pour choisir quelles photos on veut recevoir-->
+                <h3>
+                    <span class="fr">Obtenir les photos des rovers Spirit et Opportunity :</span>
+                    <span class="en">Get the pictures of Opportunity and Spirit rovers :</span>
+                </h3>
+                <label>Spirit : </label><!--Choix du rover dont on veut voir les photos-->
+                <input type=radio name="rover" value="spirit" ng-model="nasa.therover"/><br>
+                <label>Opportunity : </label>
+                <input type=radio name="rover" value="opportunity" ng-model="nasa.therover"/><br>
+                <label>
+                    <span class="fr">Date (aaaa-mm-jj) comprise entre :</span>
+                    <span class="en">The date (yyyy-mm-dd) must between the </span> <!--Ensuite, on affiche les dates entre lesquelles ont peut faire des recherches-->
+                    <span ng-if="nasa.therover=='opportunity'">{{nasa.manifestopportunity.photo_manifest.landing_date}}</span><!--On affiche les dates en fonction-->
+                    <span ng-if="nasa.therover=='spirit'">{{nasa.manifestspirit.photo_manifest.landing_date}}</span> & <span ng-if="nasa.therover=='opportunity'">{{nasa.manifestopportunity.photo_manifest.max_date}}</span>
+                    <span ng-if="nasa.therover=='spirit'">{{nasa.manifestspirit.photo_manifest.max_date}}</span>
+                </label> 
+                <input type="text" max={{nasa.meteors.photo_manifest.max_date}} min={{nasa.meteors.photo_manifest.landing_date}} name="the_date" value="AAAA-MM-JJ" ng-model="nasa.date"/><br>
+                <h4 class="fr">Choisissez une camera : </h4><!--Choix de la camera-->
+                <h4 class="en">Choose a camera : </h4>
+                <label>FHAZ : </label>
+                <input type=radio name="camera" ng-model="nasa.camera" value="Front Hazard Avoidance Camera"/>
+                <span ng-if="nasa.done" ng-class="nasa.resltfhaz">{{nasa.fhaz}}</span><br><!--Affichage du nombre de photos par camera avec une classe css correspondante-->
+                <label>RHAZ : </label>
+                <input type=radio name="camera" ng-model="nasa.camera" value="Rear Hazard Avoidance Camera"/>
+                <span ng-if="nasa.done" ng-class="nasa.resltrhaz">{{nasa.rhaz}}</span><br><!--Affichage du nombre de photos par camera avec une classe css correspondante-->
+                <label>NAVCAM : </label>
+                <input type=radio name="camera" ng-model="nasa.camera" value="Navigation Camera"/>
+                <span ng-if="nasa.done" ng-class="nasa.resltnavcam">{{nasa.navcam}}</span><br><!--Affichage du nombre de photos par camera avec une classe css correspondante-->
+                <label>PANCAM : </label>
+                <input type=radio name="camera" ng-model="nasa.camera" value="Panoramic Camera"/>
+                <span ng-if="nasa.done" ng-class="nasa.resltpancam">{{nasa.pancam}}</span><br><!--Affichage du nombre de photos par camera avec une classe css correspondante-->
+                <label>MINITES : </label><input type=radio name="camera" ng-model="nasa.camera" value="Miniature Thermal Emission Spectrometer (Mini-TES)"/>
+                <span ng-if="nasa.done" ng-class="nasa.resltminites">{{nasa.minites}}</span><br>
+				<label>Total</label><input type="radio" ng-model="nasa.camera" value="tout"/> <span ng-if="nasa.done" ng-class="nasa.reslttout">{{nasa.tout}}</span><br>
+                <input type="submit" value="Envoyer" class="btn btn-primary"/>
+            </form>
+        </div>
+        <div ng-if="nasa.done"><!--Affichage des résultats des recherches-->
+			<div ng-if="nasa.camera=='tout'">
+				<!--Si toutes les camera sont sélectionnée, le carrousel est affiché-->
+				<carrousel class="carrousel col-sm-11" carrousel-photo="photo"></carrousel>
+			</div>
+            <div ng-repeat="photo in nasa.photos.photos">
+               	<div ng-show="photo.camera.full_name==nasa.camera"><!--affiche si c'est la caméra qui est selectionnée-->
+					<div class="col-sm-5 divresult">
+                        <a href={{photo.img_src}}>
+							<img class="img-responsive responsimg" src={{photo.img_src}} ></img>
+						</a><!--utlisation de la classe img-responsive de bootstrap-->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>/*script du choix de langue*/
+	if(document.getElementById("en").checked){//A l'ouverture de la page vérification de la langue sélectionné dans le radio bouton en bas de la home page
+		for(var i=0;i<document.getElementsByClassName("en").length;i++){//affichage ou cachage de tous les élément avec la classe en
+			document.getElementsByClassName("en")[i].style.display="block";
+		}
+		for(var i=0;i<document.getElementsByClassName("fr").length;i++){//affichage ou cachage de tous les élément avec la classe fr
+			document.getElementsByClassName("fr")[i].style.display="none";
+		}
+	}else{
+		for(var i=0;i<document.getElementsByClassName("fr").length;i++){//affichage ou cachage de tous les élément avec la classe fr
+			document.getElementsByClassName("fr")[i].style.display="block";
+		}
+		for(var i=0;i<document.getElementsByClassName("en").length;i++){//affichage ou cachage de tous les élément avec la classe en
+			document.getElementsByClassName("en")[i].style.display="none";
+		}
+	}
+	document.getElementById("fr").addEventListener('click',function(){//Ecouteur qui déclanche la fonction lorsque l'on click sur les choix de langue
+		for(var i=0;i<document.getElementsByClassName("fr").length;i++){//affichage ou cachage de tous les élément avec la classe
+			document.getElementsByClassName("fr")[i].style.display="block";
+		}
+		for(var i=0;i<document.getElementsByClassName("en").length;i++){//affichage ou cachage de tous les élément avec la classe en
+			document.getElementsByClassName("en")[i].style.display="none";
+		}
+	});
+	document.getElementById("en").addEventListener('click',function(){//Ecouteur qui déclanche la fonction lorsque l'on click sur les choix de langue
+		for(var i=0;i<document.getElementsByClassName("en").length;i++){//affichage ou cachage de tous les élément avec la classe fr
+			document.getElementsByClassName("en")[i].style.display="block";
+		}
+		for(var i=0;i<document.getElementsByClassName("fr").length;i++){//affichage ou cachage de tous les élément avec la classe en
+			document.getElementsByClassName("fr")[i].style.display="none";
+		}
+	});
+</script>

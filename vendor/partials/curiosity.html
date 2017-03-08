@@ -1,0 +1,141 @@
+<!-- 
+Projet Web Design EPF 4A filière TIC
+Code écrit par Adrien LENOIRE et Guilhem PEQUILLAT
+Date : 08/03/2017
+Description du fichier :  ce code html se chargera dans la page index.html, ce code contient un article, le twiter, le formulaire des photos, un carrousel et l'affichage des photos avec ng-repeat pour le rover curiosity.
+-->
+<div class="row">
+	<article class="fr"><!--Article écrit en français-->
+        <div class="row">
+            <div class="col-md-8"><!--utilisation de bootstrap pour la responsivité-->
+                <h2> Curiosity </h2>
+                <p>
+                    Curiosity est un rover de la taille d'une voiture explorant le cratère de Gale sur Mars dans le cadre de la mission Mars Science Laboratory de la NASA. Curiosity a été lancé de Cap Canaveral le 26 novembre 2011 et a atterri sur Aeolis Palus dans le cratère Gale sur Mars le 6 août 2012. Le site Bradbury Landing était à moins de 2,4 km du centre de la cible de toucher du rover après un 560 millions de km de trajet. Les objectifs du rover comprennent : l'étude du climat et de la géologie martiens ; Évaluer si le site de terrain sélectionné à l'intérieur de Gale Crater a offert des conditions environnementales favorables à la vie microbienne, y compris une étude du rôle de l'eau; Et les études d'habitabilité planétaire en vue de la future exploration humaine.
+                </p>
+            </div>
+            <div class="col-md-4"><!--utilisation de bootstrap pour la responsivité-->
+                <section>
+                    <img src="images/curiosity-instrument.png" class="img-responsive"></img>
+                    <legend>Le rover curiosity avec ses instruments</legend>
+                </section>
+            </div>
+        </div>
+	</article>
+	<article class="en"><!--Article écrit en anglais-->
+        <div class="row">
+            <div class="col-md-8"><!--utilisation de bootstrap pour la responsivité-->
+                <h2> Curiosity </h2>
+                <p>
+                    Curiosity is a car-sized robotic rover exploring Gale Crater on Mars as part of NASA's Mars Science Laboratory mission. Curiosity was launched from Cape Canaveral on November 26, 2011 aboard the MSL spacecraft and landed on Aeolis Palus in Gale Crater on Mars on August 6, 2012. The Bradbury Landing site was less than 2.4 km from the center of the rover's touchdown target after a 560 million km journey. The rover's goals include: investigation of the Martian climate and geology; assessment of whether the selected field site inside Gale Crater has ever offered environmental conditions favorable for microbial life, including investigation of the role of water; and planetary habitability studies in preparation for future human exploration.
+                </p>
+            </div>
+            <div class="col-md-4"><!--utilisation de bootstrap pour la responsivité-->
+                <section>
+                    <img src="images/curiosity-instrument.png" class="img-responsive"></img>
+                    <legend>Curiosity's instrument</legend>
+                </section>
+            </div>
+        </div>
+	</article>
+</div>
+<div class="row">
+	<div class="col-sm-4"><!--utilisation de bootstrap pour la responsivité-->
+		<div class="twiter"><!--div pour twiter-->
+			<a class="twitter-timeline"
+			  href="https://twitter.com/marscuriosity?lang=fr"
+			  data-width="780"
+			  data-height="429">
+			Tweets by @TwitterDev
+			</a>
+		</div>
+		<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><!--script nésséssaire à l'affichage twiter-->
+	</div>
+    <div ng-app="nasa" ng-controller="nasaControllerPhotoCuriosityRecherche as nasa"><!--Controller pour l'affichage des photos des Rovers-->
+        <div class="col-sm-8">
+            <form class="formulaire" ng-submit="myRequest()"><!--Formulaire pour choisir quelles photos on veut recevoir-->
+                <h3>Obtenir les photos du rover Curiosity : </h3>
+                <label style="display:none">Curiosity : </label>
+                <input type=radio name="rover" value="curiosity" ng-model="nasa.therover" style="display:none"/><br>
+                <label>
+                    <span class="fr">Date (aaaa-mm-jj) comprise entre : </span> 
+                    <span class="en">The date (yyyy-mm-dd) must be between the </span>{{nasa.curiositymanifest.photo_manifest.landing_date}} & {{nasa.curiositymanifest.photo_manifest.max_date}}
+                </label> 
+                <input type="text" max={{nasa.meteors.photo_manifest.max_date}} min={{nasa.meteors.photo_manifest.landing_date}} name="the_date" value="AAAA-MM-JJ" ng-model="nasa.date"/><br>
+                <h4 class="fr">Choisissez une camera : </h4>
+                <h4 class="en">Choose a camera : </h4>
+                <label>FHAZ : </label>
+                <input type=radio name="camera" ng-model="nasa.camera" value="Front Hazard Avoidance Camera"/>
+                <span ng-if="nasa.done" ng-class="nasa.resltfhaz">{{nasa.fhaz}}</span><br><!--Affichage du nombre de photos par camera avec une classe css correspondante-->
+                <label>RHAZ : </label>
+                <input type=radio name="camera" ng-model="nasa.camera" value="Rear Hazard Avoidance Camera"/>
+                <span ng-if="nasa.done" ng-class="nasa.resltrhaz">{{nasa.rhaz}}</span><br><!--Affichage du nombre de photos par camera avec une classe css correspondante-->
+                <label>NAVCAM : </label>
+                <input type=radio name="camera" ng-model="nasa.camera" value="Navigation Camera"/>
+                <span ng-if="nasa.done" ng-class="nasa.resltnavcam">{{nasa.navcam}}</span><br><!--Affichage du nombre de photos par camera avec une classe css correspondante-->
+                <label>MAST : </label>
+                <input type=radio name="camera" ng-model="nasa.camera" value="Mast Camera"/>
+                <span ng-if="nasa.done" ng-class="nasa.resltmast">{{nasa.mast}}</span><br><!--Affichage du nombre de photos par camera avec une classe css correspondante-->
+                <label>CHEMCAM : </label>
+                <input type=radio name="camera" ng-model="nasa.camera" value="Chemistry and Camera Complex"/>
+                <span ng-if="nasa.done" ng-class="nasa.resltchemcam">{{nasa.chemcam}}</span><br><!--Affichage du nombre de photos par camera avec une classe css correspondante-->
+                <label>MAHLI : </label>
+                <input type=radio name="camera" ng-model="nasa.camera" value="Mars Hand Lens Imager"/>
+                <span ng-if="nasa.done" ng-class="nasa.resltmahli">{{nasa.mahli}}</span><br><!--Affichage du nombre de photos par camera avec une classe css correspondante-->
+                <label>MARDI : </label>
+                <input type=radio name="camera" ng-model="nasa.camera" value="Mars Descent Imager"/>
+                <span ng-if="nasa.done" ng-class="nasa.resltmardi">{{nasa.mardi}}</span><br><!--Affichage du nombre de photos par camera avec une classe css correspondante-->
+				<label>Total</label><input type="radio" ng-model="nasa.camera" value="tout"/> <span ng-if="nasa.done" ng-class="nasa.reslttout">{{nasa.tout}}</span><br>
+                <input type="submit" value="Envoyer" class="btn btn-primary"/>
+            </form>
+        </div>
+		<div class="row">
+			<div ng-if="nasa.done"><!--Affichage des résultats des recherches-->
+			<div ng-if="nasa.camera=='tout'">
+				<!--Si toutes les camera sont sélectionnée, le carrousel est affiché-->
+				<carrousel class="carrousel col-sm-11" carrousel-photo="photo"></carrousel>
+			</div>
+			<div ng-repeat="photo in nasa.photos.photos">
+				<div ng-show="photo.camera.full_name==nasa.camera">
+					<div class="col-sm-5 divresult"><!--affiche si c'est la caméra qui est selectionnée-->
+						<a href={{photo.img_src}}>
+							<img class="img-responsive responsimg" src={{photo.img_src}} ></img>
+						</a><!--utlisation de la classe img-responsive de bootstrap-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>/*script du choix de langue*/
+	if(document.getElementById("en").checked){//A l'ouverture de la page vérification de la langue sélectionné dans le radio bouton en bas de la home page
+		for(var i=0;i<document.getElementsByClassName("en").length;i++){//affichage ou cachage de tous les élément avec la classe en
+			document.getElementsByClassName("en")[i].style.display="block";
+		}
+		for(var i=0;i<document.getElementsByClassName("fr").length;i++){//affichage ou cachage de tous les élément avec la classe fr
+			document.getElementsByClassName("fr")[i].style.display="none";
+		}
+	}else{
+		for(var i=0;i<document.getElementsByClassName("fr").length;i++){//affichage ou cachage de tous les élément avec la classe fr
+			document.getElementsByClassName("fr")[i].style.display="block";
+		}
+		for(var i=0;i<document.getElementsByClassName("en").length;i++){//affichage ou cachage de tous les élément avec la classe en
+			document.getElementsByClassName("en")[i].style.display="none";
+		}
+	}
+	document.getElementById("fr").addEventListener('click',function(){//Ecouteur qui déclanche la fonction lorsque l'on click sur les choix de langue
+		for(var i=0;i<document.getElementsByClassName("fr").length;i++){//affichage ou cachage de tous les élément avec la classe
+			document.getElementsByClassName("fr")[i].style.display="block";
+		}
+		for(var i=0;i<document.getElementsByClassName("en").length;i++){//affichage ou cachage de tous les élément avec la classe en
+			document.getElementsByClassName("en")[i].style.display="none";
+		}
+	});
+	document.getElementById("en").addEventListener('click',function(){//Ecouteur qui déclanche la fonction lorsque l'on click sur les choix de langue
+		for(var i=0;i<document.getElementsByClassName("en").length;i++){//affichage ou cachage de tous les élément avec la classe fr
+			document.getElementsByClassName("en")[i].style.display="block";
+		}
+		for(var i=0;i<document.getElementsByClassName("fr").length;i++){//affichage ou cachage de tous les élément avec la classe en
+			document.getElementsByClassName("fr")[i].style.display="none";
+		}
+	});
+</script>

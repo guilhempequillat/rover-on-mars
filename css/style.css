@@ -1,0 +1,208 @@
+/*
+Projet Web Design EPF 4A filière TIC
+Code écrit par Adrien LENOIRE et Guilhem PEQUILLAT
+Date : 08/03/2017
+Description du fichier :  ce code css contient les styles du site internet, les commentaire indique quelles parties sont affectées par le code. Il y a également une partie responsive à la fin.
+*/
+
+@font-face {/*Importation de la police du titre*/
+	font-family: "font1";
+	src: url('../font/Orbitron-Medium.ttf');
+}
+@font-face {/*Importation de la police du reste du site*/
+	font-family: "font2";
+	src: url('../font/Catamaran-Medium.ttf');
+}
+
+body{/*Le background du site est une photo sur un font noir*/
+    background-color: black;
+    background-image: url("../images/540070.jpg");
+    background-position:50% 100px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: contain;
+}
+header{/*La barre de menu est rouge*/
+	background-color: rgb(150,0,0);	
+}
+article{/*Les articles sont écrit en noir sur un fond blanc transparent*/
+	background-color: rgba(255,255,255,0.85);
+	margin:20px;
+	padding:20px;
+	border-radius: 10px;
+	color:black;
+}
+h1{/*La police spéciale est appelée, l'écriture est en blanc*/
+	color:white;
+	font-family:"font1";
+	padding-top: 15px;
+	margin-left: 20px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 20px;
+}
+footer{/*Le footer est en gris claire*/
+	height:100px;
+	background-color: rgb(50,50,50);
+	width: :100%;
+	color:white;
+}
+.contentpage{/*La police principale */
+	font-family:"font2";
+}
+.formulaire{/*Le formulaire est écrit en noir sur un fond blanc transparent*/
+	background-color: rgba(255,255,255,0.8);
+	border-radius: 5px;
+	color: black;
+	margin: 10px;
+	padding: 20px;
+	
+}
+.twitter-timeline{/*Positionnement du block twiter pour qu'il soit aligné avec les autres block */
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 150px;
+}
+.carrousel{/*Le carousel s'adapte à la largeur de la page et la hauteur au photos qui sont affichées, le fond est blanc transparent et écrit en noir*/
+	height: 100%;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	margin: 50px;
+	background-color: rgba(255,255,255,0.8);
+	border-radius: 5px;
+}
+.imgcarrousel{/*Les images du carrousel sont centré*/
+	display: block;
+    margin-left: auto;
+    margin-right: auto 
+}
+
+.divresult{/*Les images qui sont affiché par les recherches de photo ont un fond blanc transparent avec des marges pour que les photos soient bien positionné sur l'écran*/
+	padding: 5px;
+	border-radius: 5px;
+	background-color: rgba(255,255,255,0.7);
+	color : black;
+	margin: 10px;
+	margin-left: 40px;
+}
+.fleche:hover{/*Lorsque l'on passe sur les flèches du carrousel, elles sont en surbrillance*/
+	background-color: rgba(255,255,255,0.6);
+}
+.twiter{/*Positionnement du block twiter pour qu'il soit aligné avec les autres block */
+	margin-top: 10px;
+	margin-right: 15px;
+}
+.iconlangue{/*réglage de la taille des icones pour la langue*/
+	width:28px;
+	height: 20px;
+}
+.iconlangue:hover{/*Lorsque l'icone est survolé, le curseur change de forme*/
+	cursor: pointer;
+}
+.pasresult{/*Si il n'y a pas de photos pour la date et la caméra demandé, les nombre s'écrivent en rouge*/
+	color:red;
+}
+.result{/*Si il y a de photos pour la date et la caméra demandé, les nombre s'écrivent en vert*/
+	color:green;
+}
+.resultMeteor{/*Les informations sur les météorites s'affichent dans un cadre aux bord arrondis au fond blanc transparent écrit en noir */
+	background-color: rgba(255,255,255,0.5);
+	border-radius: 10px;
+	padding: 10px;
+	box-shadow: 5px 5px 2px #888888;
+	color: black;
+}
+#choixdelangue{/*La position du dix de langue est dans le footer à droite*/
+	position: absolute;
+	right: 20px;
+	margin-top: 40px;
+}
+
+.lienmenu{/*La police des lien pour allé sur les autres page est la même que pour le titre*/
+	font-family:"font1";
+	color: white;
+	padding-top: 20px;
+	height: 60px;
+}
+.lienmenu:hover{/*Les liens du menu change de couleur avec une animation lorsque l'on passe la souris dessus*/
+	background-color:  rgb(255,255,255);
+	animation-name: changecouleur;
+	animation-duration: 0.5s;
+	color: black;
+}
+
+@keyframes changecouleur{/*animation de changement de couleur, le fond devient blanc et l'écriture devient noir*/
+	from {
+		background-color: rgb(150,0,0);
+		color: white;
+	}
+	to {
+		background-color:rgb(255,255,255);
+		color:black;
+	}
+}
+
+@media screen and (max-width: 734px) {/*Lorsque la taille de l'écran est inférieur à 734px, cette partie du css est exécuté*/
+    .menugrand {/*le grand menu est caché*/
+        display: none;
+    }
+	.menuicon{/*affichage du petit menu*/
+		width: 93px;
+		height: 93px;
+		display: flex;
+		position: absolute;
+		top:0px;
+  		right: 0px;
+	}
+	.divresult{/*Ajustage de l'affichage des photos en résultat*/
+		margin-right: 40px;
+	}
+	#linkspetit lienmenu{/*Le text n'est plus souligné lorsque l'on passe dessus*/
+		text-decoration: none;
+	}
+	.menuicon:hover{/*La couleur de l'icone du menu devient plus foncé */
+		background-color: rgb(100,0,0);
+	}
+	.menuicon:hover + #linkspetit{/*Lorsque l'on survole l'icone menu, la liste des liens apparait en dessous*/
+		display: block;
+		position: absolute;
+		z-index: 1;/*Les liens sont mis au premier plan*/
+		top: 92px;
+		right: 0px;
+	}
+	#linkspetit:hover{/*Lorsque la souris passe sur les liens, les liens restent à la même position*/
+		display: block;
+		position: absolute;
+		z-index: 1;
+		top: 92px;
+		right: 0px;
+	}
+	.divlink{/*Le text est décolé des bord du div*/
+		padding: 15px;
+	}
+	#linkspetit{/*Par défaut losque l'on ne passe pas dessus, les liens sont caché*/
+		display: none;
+	}
+	.divlink{/*Réglage de la taille des liens du petit menu et de leur couleur (rouge)*/
+		width:200px;
+		height: 50px;
+		background-color: rgb(150,0,0);
+	}
+	.divlink:hover{/*Lorsque l'on passe au dessus des liens du petit menu, la couleur change*/
+		width:200px;
+		background-color:white;
+		text-decoration: none;
+		color: black;
+	}
+}
+
+@media screen and (min-width: 735px) {/*Parie qui s'execute lorsque la largeur de l'écran passe au dessus de 735px*/
+	.menuicon{/*L'icone du petit menu est caché*/
+		width: 50px;
+		height: 50px;
+		display: none;
+	}
+	#linkspetit{/*Les liens du petit menu sont caché*/
+		display: none;
+	}
+}
